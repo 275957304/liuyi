@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="author" content="xinyou"/>
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+<meta name="Description" content="热血江湖来袭，重温热血情怀">
+<meta name="Keywords" content="">
+<title>热血格斗江湖</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="wraper" id="wraper">
+	<div class="loading" id="loading">
+		<div class="inner">
+			<p class="loading_img">Loading...</p>
+			<p class="loading_rate" id="loading_rate">0%</p>
+		</div>
+	</div>
+    <div class="btn_music"><a id="btn_music" class="on" href="javascript:;"><span></span></a></div>
+	<div id="container">
+        <div class="logo"><img src="img/logo.png"></div>
+        <div class="tit"><img src="img/t.png"></div>
+        <a href="javascript:;" id="start" class="ht"><!--img src="img/start.png"--></a>
+        <div class="left_figure"><img src="img/figure1.png"></div>
+        <div class="right_figure"><img src="img/figure2.png"></div>
+        <div class="btn_lsit">
+            <a href="javascript:;" class="rankingBtn">排行榜</a>            
+            <a href="javascript:;" class="ruleBtn">活动规则</a>
+            <a href="javascript:;" class="myResult">我的战绩</a>
+        </div>
+    </div>
+    <div id="ranking">
+    <p class="title"><span id="m"></span>月<span id="d"></span>日排行榜</p>
+        <p class="ran_tit"><span>排名</span><span>QQ号</span><span>分数</span></p>
+        <div class="show_ran">
+            <ul id="ranHeTi"></ul>
+            <ul id="rankingList"></ul>
+        </div>
+        <a class="back" href="#">返回首页</a>
+    </div>
+    <div id="myRan">
+        <p class="ran_txt">您还没有成绩赶紧参加吧！</p>
+        <div class="ranking_box">
+            <p class="title">我的战绩</p>
+            <p class="title2">*当天若参加多次取分数最高的一次</p>
+            <p class="ran_tit my_ran_tit"><span>日期</span><span>分数</span></p>
+            <ul id="myRanList" class="show_ran show_my">
+
+            </ul>
+        </div>
+        <a class="back" href="#">返回首页</a>
+    </div>
+    <div id="rule">
+        <p class="title">活动规则</p>
+        <div class="rule_txt">
+            <p>1、每个微信号每日可无限次进行游戏。</p>
+            <p>2、每天23点59分59秒结算排行榜，排名第一的玩家可获得六一热血礼包一份(300元宝+神魂之翼*30+凤灵石*10)，每天结算一次。</p>
+            <p>3、一轮游戏获得3次“完美合体”的玩家可以获得六一超级礼包一份(1000元宝+万兽令+幻兽令)，限量5份。</p>
+            <p>4、若分数一致，先得到高分的玩家，排行靠前。</p>
+            <p>5、官方将通过QQ号联系获奖者，送出礼包。  </p>
+            <p>6、本次活动时间：2015年5月28日至2015年6月7日</p>
+        </div>
+        <a class="back" href="#">返回首页</a>
+    </div>
+    
+    <div id="moveBox">
+        <a id="switchBtn" href="javascript:;">点击开始</a>
+        <div class="prompt">
+            <a href="javascript:;" id="ready">点击开始</a>
+            <p class="t1">发动合体绝招!</p>
+            <p class="t2">越接近中间，才能发动合体技，获得礼包哦！</p>
+            <p class="t3">任意点击屏幕让指针停下来！</p>
+            <p class="ready_txt">READY</p>
+        </div>
+        
+        <div id="result">
+            <p id="resultTxt">合体成功!!</p>
+            <div class="fraction"><span id="fraction">0</sapn>分</div>        
+        </div>
+
+        <div id="total" class="bar">
+            <span class="success"></span>
+            <span class="perfect"></span>
+            <div id="roll" style="left:255px;"></div>
+        </div>
+        
+        <div id="figure">
+            <div class="p1 pulse"><img src="img/figure3.png"></div>
+            <div class="p2 pulse2"><img src="img/figure4.png"></div>
+        </div>
+
+    </div>
+    
+</div>
+
+<div id="popUp">
+    <div class="pop_box">
+        <p class="pop_frac"><span class="user_fraction">0</span>分!!</p>
+        <p class="pop_txt">恭喜大侠一共获得<span class="user_fraction">0</span>分！！！</p>
+        <div class="user_input clearfix">
+            <input type="text" id="userQq" placeholder="请输入您的QQ">
+            <a id="submit" href="javascript:void(0)">提 交</a>
+        </div>
+        <div class="pop_btn clearfix">
+            <a href="javascript:;" class="rankingBtn fl">排行榜</a>
+            <a href="javascript:;" class="ruleBtn">活动规则</a>
+            <a href="javascript:;" class="myResult fr">我的战绩</a>
+        </div>
+        <a id="pop_back" href="javascript:;">返回首页</a>
+    </div>
+</div>
+
+<div class="mask flexcontainer" id="mask" style="display:none">
+    <div class="mask-box">
+        <div class="mask-pic"><i></i></div>
+        <span>为了更好的体验，请将手机/平板竖过来</span>
+    </div>
+</div>
+
+
+<audio id="audio-music" preload="auto" autoplay="autoplay" loop="loop">
+	<source src="img/music.mp3" type="audio/mpeg"></source>
+</audio>
+
+<!-- <script type="text/javascript" src='http://images.vxinyou.com/jsCommon/zepto.min.js'></script> -->
+<script type="text/javascript" src="http://images.vxinyou.com/jsCommon/jquery-1.7.2.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+/*加载*/
+var load = document.getElementById('loading');
+var imgPath = 'http://gdjh.vxinyou.com/zt/liuyi/img/';
+var loadingPage = (function () {
+    var imgSources = ['bj.jpg','figure1.png','figure2.png','figure3.png','figure4.png','figure1.png','logo.png','start.png','dazzle.png','t.png'];
+    for (var i = 0; i < imgSources.length; i++) {
+        imgSources[i] = (imgPath + imgSources[i]);
+    };
+    var loadImage = function (path, callback) {
+        var img = new Image();
+        img.onload = function () {
+            img.onload = null;
+            callback(path);
+        }
+        img.src = path;
+    }
+
+    var imgLoader = function (imgs, callback) {
+        var len = imgs.length, i = 0;
+        while (imgs.length) {
+            loadImage(imgs.shift(), function (path) {
+                callback(path, ++i, len);
+            })
+        }
+    }
+    var rateNum = document.getElementById('loading_rate');
+    //var bar = document.getElementById('bar');
+    var percent = 0;
+    imgLoader(imgSources, function (path, curNum, total) {
+        percent = curNum / total;
+        rateNum.innerHTML = Math.floor(percent * 100) + '%';
+        if (percent == 1) {
+            //$("#main").removeClass("sec-01-show");
+            setTimeout(function () {
+                $('#loading').css('display', 'none');
+            }, 500);
+        }
+    });
+})();
+
+
+window.onload=function(){
+    setTimeout(function(){
+        document.getElementById('container').className="container";
+    },500);
+}
+
+//判断手机横竖屏状态： 
+function hengshuping(){ 
+    if(window.orientation==180||window.orientation==0){ 
+        $("#mask").hide();        
+    } 
+    if(window.orientation==90||window.orientation==-90){ 
+        $("#mask").show();         
+    }
+} 
+window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", hengshuping, false);  
+
+$(window).on('scroll.elasticity', function (e) {
+    e.preventDefault();
+}).on('touchmove.elasticity', function (e) {
+    e.preventDefault();
+});
+
+
+$(function(){
+    var timer = null,   //清除
+        iSpeed = 8,     //速度
+        clickNum = 0,   //游戏次数
+        numArray = [],
+        BarWidt = $('#total').width(),
+        maxW = BarWidt - $("#roll").width();  //最大距离
+    var speed = [2,3,4];
+  
+ 
+    $.getScript('http://event.vxinyou.com/wechat/JsApi/openid?mp_name=gedoujh&random=' + Math.random(), function(script, textStatus) {
+        // JS脚本加载成功
+        if (textStatus == 'success'){
+            // 没有open_id则跳转到微信自动授权页面
+            wechat_open_id == '' ? location.href = wechat_login_url :  open_id = wechat_open_id ;
+			// 页面浏览统计 
+			$.get("http://event.vxinyou.com/activity/wx_count/view", {"count_id":13, 'openid':open_id}, function(response) {
+				if (response.success){
+					
+				}else{
+					alert(response.message)
+				}
+			},"jsonp");
+    
+            $.get("http://event.vxinyou.com/activity/integral_game/set_config", {"ig_id":1, 'openid':open_id}, function(response) {
+                if (response.success)
+                {
+
+                    if(response.qq){
+                        $(".user_input").hide()
+                    }else{
+                        $(".user_input").show()   
+                    };
+
+                    speed = response.speed.split("|");
+
+                }else{
+                    alert(response.message)
+                }
+            },"jsonp");
+        
+        }
+        else{
+            alert('加载微信用户open_id接口失败');
+        }
+    });
+   
+
+   
+    
+   
+    function startMove(setTime){
+        console.log(setTime);    
+        timer = setInterval(function(){
+            var divLeft = $("#roll").position().left + iSpeed;
+                //console.log($("#roll").position().left);
+            if(divLeft >= maxW || divLeft <= 0){iSpeed *= -1;}
+            $("#roll").css("left", divLeft + 'px');
+        },setTime)
+    }
+
+    //音乐
+    $('#btn_music').on('touchend',function(event){
+        var classname = $(this).attr('class');
+        if ( classname == 'on' ) {
+            document.getElementById('audio-music').pause();
+            $(this).removeClass('on').addClass('off');
+        } else if ( classname == 'off' ){
+            document.getElementById('audio-music').play();
+            $(this).removeClass('off').addClass('on');
+        };
+        return false;
+    });
+
+    function arrayAdding(setArr){
+        var temp=0;
+        for (var i = 0; i < setArr.length; i++) {
+            temp += parseFloat(setArr[i]);
+        };
+        return (temp).toFixed(2);
+    }
+    
+    function AgainGame(){
+        $("#result").hide();
+        $("#popUp").hide();
+        $("#switchBtn").hide();
+        $(".prompt").show();
+        $("#container").show();
+    }
+
+    $('.myResult,#pop_back,.back').on("touchstart",function(){
+        AgainGame();
+    });
+
+    //返回首页
+    $('.back').on("touchstart",function(){
+        $("#ranking , #rule, #myRan").hide();
+        $("#container").show();
+    });
+    // 排行榜
+    $('.rankingBtn').on("touchstart",function(){
+        $("#popUp").hide();
+        $("#container").hide();
+        $("#ranking").show();
+        $.get("http://event.vxinyou.com/activity/integral_game/ranking", {"ig_id":1}, function(response){
+            if (response.success){
+                $('#rankingList').html('');
+                setDate = response.day.split("-");
+                $("#m").html(setDate[1]);
+                $("#d").html(setDate[2]);
+                $.each(response.list, function(i,n){
+                    $('#rankingList').append('<li><span>'+ n.sort +'</span><span>'+ n.qq +'</span><span>'+ n.score +'</span></li>');
+                });
+				$('#ranHeTi').html('');
+				$.each(response.perfect, function(i,n){
+					$('#ranHeTi').append('<li><span>'+ n.sort +'</span><span>'+ n.qq +'</span><span>'+ n.score +'</span></li>');
+				});				
+            }
+        },"jsonp");
+        
+    });
+
+    //我的战绩
+    $('.myResult').on("touchstart",function(){
+        $("#popUp").hide();
+        $("#container").hide();
+        $("#myRan").show();
+        
+        $.get("http://event.vxinyou.com/activity/integral_game/my_list", {"ig_id":1, 'openid':open_id}, function(response){
+            if (response.success){
+                //$('.show_ran').html('');
+                //console.log(response.list)
+                if(response.list.length < 1){
+                    $(".ranking_box").hide();
+                    $(".ran_txt").show();
+                }else{
+                    $(".ran_txt").hide();
+                    $('#myRanList').html('');
+                    $.each(response.list, function(i,n){
+                        $('#myRanList').append('<li><span>'+ n.day +'</span><span>'+ n.score +'</span></li>');
+                    });
+                }   
+            }
+        },"jsonp");
+        
+    });
+
+    //活动规则
+    $('.ruleBtn').on("touchstart",function(){
+        $("#popUp").hide();
+        $("#container").hide();
+        $("#rule").show();
+    });
+
+    //开始游戏
+    $('#start').on("touchstart",function(){
+        $("#container").hide();
+        $("#container").hide();
+         $("#figure").removeClass('separate2');
+         $("#figure").addClass('separate');
+         $(".dazzle, .dazzle2").remove();
+        $("#moveBox, #ready, #prompt").show();
+        $("#moveBox").append("<div class='black' id='moveBj'></div>")
+        clearInterval(timer);
+    });
+
+    $('#ready').on("touchstart",function(){
+        $(".ready_txt").html("GO");
+        setTimeout(function(){
+            $(".prompt").hide();
+            $("#switchBtn").show();
+            $("#moveBj").remove();
+            $("#figure").addClass('separate');           
+            startMove(speed[0]);
+            $(".ready_txt").html("READY");
+        },1000)
+    });
+    
+    // var fit = {
+    //     fitSuccess : function (){ //合体成功
+    //         var suceessMin = $(".success").position().left,
+    //             suceessWidth = $(".success").width(),
+    //             successMax = success + suceessWidth;
+    //     },
+    //     fitPerfect : function(pgname){     //完美合体
+    //         $(".popin").remove();
+    //     }
+    // }; 
+
+    
+    $('#switchBtn').on("touchstart",function(){
+        var pointer = parseInt($("#roll").position().left + ($("#roll").width()/2)),
+            core = BarWidt / 2 ;
+            clickNum ++;
+            console.log(clickNum);
+            clearInterval(timer);
+            $(".dazzle, .dazzle2").remove();
+            //console.log(pointer);
+            $("#result").show();
+            if(pointer < core){
+                var fraction = (parseFloat((pointer/core)*100)).toFixed(2);
+                //$("#fraction").html(Math.abs(fraction));
+            }else{
+                var fraction = (100 - (((pointer - core)/core)*100)).toFixed(2);
+            };
+            if(fraction > 90){
+                $("#resultTxt").html("完美合体");
+                $("#figure").removeClass('separate');
+                $("#figure").removeClass('separate2');
+                setTimeout(function(){
+                    $("#figure").addClass('separate2');
+                    $("#figure").append("<div class='dazzle'></div>")
+                },500); 
+            }else if(fraction > 60){
+                $("#figure").removeClass('separate');
+                $("#figure").removeClass('separate2');
+                setTimeout(function(){
+                    $("#figure").addClass('separate2');
+                    $("#figure").append("<div class='dazzle2'></div>")
+                },500);
+
+                $("#resultTxt").html("合体成功");
+            }else{
+                $(".dazzle").hide();
+                $("#figure").removeClass('separate');
+                $("#figure").removeClass('separate2');
+                setTimeout(function(){
+                    $("#figure").addClass('separate');
+                },500);
+                $("#resultTxt").html("合体失败");   
+            }
+            numArray.push(fraction);
+            setTimeout(function(){
+                $("#result").hide();
+            },2000)
+            $("#fraction").html(Math.abs(fraction));
+            if(clickNum > 2){
+
+$.get("http://event.vxinyou.com/activity/integral_game/set_config", {"ig_id":1, 'openid':open_id}, function(response) {
+    if (response.success){
+        if(response.qq){
+            $(".user_input").hide()
+        }else{
+            $(".user_input").show()   
+        };
+    }
+},"jsonp");
+
+                clickNum = 0;
+                clearInterval(timer);               
+                setTimeout(function(){
+                    $(".dazzle").remove();
+                    $(".dazzle2").remove(); 
+                    $("#popUp").show(); 
+                },1500);
+                //console.log(numArray);
+                $(".user_fraction").html(arrayAdding(numArray))
+                //clickNum = 0;
+
+                //提交分数
+                $.get("http://event.vxinyou.com/activity/integral_game/submit", {"ig_id":1, 'openid':open_id, 'first':numArray[0], 'second':numArray[1],'third':numArray[2]}, function(response) {
+                    if (response.success)
+                    {
+                        numArray = []; 
+                    }else{
+                        alert(response.message)
+                    }
+                },"jsonp");
+
+            }else{
+
+                if(clickNum == 1){
+                    startMove(speed[1]);
+                }else if(clickNum == 2){
+                    startMove(speed[2]);
+                }else{
+                    clearInterval(timer);  
+                }  
+
+            }            
+            isTrue = true;  
+    });
+
+    // 填写联系QQ
+    $('#submit').on("touchstart",function(){
+        var qq = $("#userQq").val();
+        if(qq == ""){
+            alert("QQ号不能为空");
+            return false;
+        }
+
+        $.get("http://event.vxinyou.com/activity/integral_game/set_qq", {"ig_id":1, 'openid':open_id, 'qq':qq}, function(response) {
+            if (response.success)
+            {
+                $("#popUp").hide();
+                $("#container").show();
+            }else{
+                alert(response.message)
+            }
+        },"jsonp");
+    });
+
+})
+
+
+// 加上随机参数以解决安卓缓存问题
+$.getScript('http://event.vxinyou.com/wechat/JsApi/share?mp_name=gedoujh&random=' + Math.random(), function() {
+    /**
+     * 把相关接口的回调放在wx.ready中以确保正常执行。
+     */
+    wx.ready(function () {
+    
+        // 分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '热血格斗江湖', // 分享标题
+            link: 'http://gdjh.vxinyou.com/zt/liuyi/', // 分享链接
+            imgUrl: 'http://gdjh.vxinyou.com/zt/liuyi/img/share.jpg', // 分享图标
+            success: function () { 
+                // 用户确认分享后执行的回调函数
+                share();
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+            }
+        });
+         
+        // 分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '热血格斗江湖', // 分享标题
+            desc: '热血江湖来袭，重温热血情怀', // 分享描述
+            link: 'http://gdjh.vxinyou.com/zt/liuyi/', // 分享链接
+            imgUrl: 'http://gdjh.vxinyou.com/zt/liuyi/img/share.jpg', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () { 
+                // 用户确认分享后执行的回调函数
+                share();
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    
+    });
+});
+
+//分享回调  统计
+function share(){ 
+    $.get("http://event.vxinyou.com/activity/wx_count/share", {"count_id":13, 'openid':open_id}, function(response) {
+        if (response.success)
+        {
+            window.location.reload();
+        }else{
+            alert(response.message);
+        }
+    },"jsonp");  
+}
+</script>
+</body>
+</html>
